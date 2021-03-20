@@ -23,18 +23,22 @@ PRIME = "prime"
 
 
 def is_prime(n):
-    if n <= 1:
-        return False
-    if n <= 3:
-        return True
-    if n % 2 == 0 or n % 3 == 0:
-        return False
-    i = 5
-    while i * i <= n:
-        if n % i == 0 or n % (i + 2) == 0:
-            return False
-        i = i + 6
-        return True
+    if n == 2 or n == 3: return True
+    if n < 2 or n % 2 == 0: return False
+    if n < 9: return True
+    if n % 3 == 0: return False
+    r = int(n ** 0.5)
+    # since all primes > 3 are of the form 6n ± 1
+    # start with f=5 (which is prime)
+    # and test f, f+2 for being prime
+    # then loop by 6.
+    f = 5
+    while f <= r:
+        print('\t', f)
+        if n % f == 0: return False
+        if n % (f + 2) == 0: return False
+        f += 6
+    return True
 
 
 def filter_numbers(numbers, filter_type):
@@ -54,12 +58,8 @@ def filter_numbers(numbers, filter_type):
                 result_numbers.append(number)
     elif filter_type == "prime":
         for number in numbers:
-            if number > 1:
-                if is_prime(number):
-                    result_numbers.append(number)
-                    print(number, "case 2 is a prime number")
-            else:
-                print(number, "case 3 is not a prime number")
+            if is_prime(number):
+                result_numbers.append(number)
     else:
         return "Unknown type"
 
