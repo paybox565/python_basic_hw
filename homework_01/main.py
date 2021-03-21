@@ -4,7 +4,7 @@
 """
 
 
-def power_numbers(numbers):
+def power_numbers(*numbers):
     """
     функция, которая принимает N целых чисел,
     и возвращает список квадратов этих чисел
@@ -38,7 +38,6 @@ def is_prime(n):
     # then loop by 6.
     f = 5
     while f <= r:
-        print('\t', f)
         if n % f == 0:
             return False
         if n % (f + 2) == 0:
