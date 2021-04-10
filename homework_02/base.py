@@ -4,21 +4,21 @@ from homework_02.exceptions import LowFuelError, NotEnoughFuel
 class Vehicle:
     started = False
 
-    def __init__(self, weight=0, fuel=0, fuel_consumption=0):
+    def __init__(self, weight: int = 0, fuel: int = 0, fuel_consumption: int = 0):
         self.weight = weight
         self.fuel = fuel
         self.fuel_consumption = fuel_consumption
 
     def start(self):
-        try:
-            self.fuel > 0
-        except Exception:
-            raise LowFuelError
-        else:
-            self.started = True
+        if self.fuel == 0:
+            raise LowFuelError()
 
-    def move(self):
-        try:
-            self.fuel >= self.fuel_consumption
-        except Exception:
-            raise NotEnoughFuel
+        self.started = True
+
+    def move(self, distance: int):
+        if self.fuel < distance*self.fuel_consumption:
+            raise NotEnoughFuel()
+
+        self.fuel -= distance*self.fuel_consumption
+
+
